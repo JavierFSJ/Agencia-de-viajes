@@ -1,0 +1,26 @@
+extends ./layout/index 
+block contenido
+  main.container.mt-5
+    h1.text-center #{titulo}
+
+    include ./layout/testimoniales
+    .row.mt-5
+      h2.d-block.w-100.text-center Agrega un testimonial
+      .row.justify-content-center.col
+        .col-md-8
+          if(alerta)
+            alert.col.alert-success.d-block.py-2.px-3.text-center.font-weight-bold.my-2 #{alerta}
+          if(errores)
+           each error in errores
+            alert.col.alert-danger.d-block.py-2.px-3.text-center.font-weight-bold.my-2 #{error}
+          form(action="/testimoniales"  method="POST")
+            .form-group
+               label(for="nombre") Nombre 
+               input#nombre(type="text", placeholder="Tu nombre" , value=nombre, name="nombre" class="form-control w-100")
+            .form-group
+               label(for="email") Correo 
+               input#email(type="email", placeholder="Tu email" , value=email ,name="email" class="form-control w-100")
+            .form-group
+               label(for="mensaje") Mensaje 
+               textarea#mensaje(name="mensaje", rows="3" , class="form-control w-100") #{mensaje}
+            input.btn.btn-success.btn-block(type="submit" , value="Enviar")              
